@@ -665,4 +665,4 @@ const e=require("./cjs/particles");for(let t in e)e.default[t]=e[t];module.expor
 },{"./App.css":"vKFU","react":"1n8/","react-spinners":"vWKJ","./Contact":"B6pC","react-particles-js":"vN55"}],"Focm":[function(require,module,exports) {
 "use strict";var e=u(require("react")),t=u(require("react-dom"));require("./index.css");var r=u(require("./App"));function u(e){return e&&e.__esModule?e:{default:e}}t.default.render(e.default.createElement(e.default.StrictMode,null,e.default.createElement(r.default,null)),document.getElementById("root"));
 },{"react":"1n8/","react-dom":"NKHc","./index.css":"vKFU","./App":"lY9v"}]},{},["Focm"], null)
-//# sourceMappingURL=/src.c13d923d.js.map
+//# sourceMappingURL=src.c13d923d.js.map
