@@ -5,9 +5,11 @@
   "author": "Michal Dohnal",
   "main": "src/index.html",
   "devDependencies": {
-    "@babel/core": "^7.10.2",
+    "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
+    "@emotion/babel-plugin": "^11.2.0",
+    "babel-plugin-emotion": "^11.0.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
@@ -38,7 +40,11 @@
     ]
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-spinners": "^0.10.6"
   }
 }
