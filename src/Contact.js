@@ -18,7 +18,7 @@ function Contact() {
           </i>
           <span className="visually-hidden">LinkedIn</span>
         </a>
-        <a href="https://www.linkedin.com/in/michal-dohnal-b496b7188/" target="_blank" rel="noopener">
+        <a href="https://www.instagram.com/dohny/" target="_blank" rel="noopener">
           <i aria-hidden="true">
             <AiOutlineInstagram className="icon" color="white" alt="Instagram Icon" />
           </i>
