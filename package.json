@@ -24,7 +24,7 @@
     "del-node-modules": "rm -rf node_modules",
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html -d build",
-    "prod-build": "parcel build src/index.html -d docs --public-url docs",
+    "prod-build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./",
     "format": "prettier \"src/**/*.{js,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
   },
