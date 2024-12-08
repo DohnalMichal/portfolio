@@ -55,9 +55,7 @@ const Navbar = () => {
                 />
               )}
             </AnimatePresence>
-            <div className="z-20 relative group-hover:border-gray-700 text-white">
-              {link.label}
-            </div>
+            <div className="z-20 relative text-white">{link.label}</div>
           </Link>
         ))}
       </div>

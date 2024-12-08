@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { BackgroundBeams } from "@/components/BackgroundBeams";
 import { Navbar } from "@/components/Navbar";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Porfolio",
@@ -16,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased bg-gray-900`}>
+      <body className={`${inter.className} antialiased bg-gray-900`}>
         <Navbar />
         {children}
         <BackgroundBeams />
