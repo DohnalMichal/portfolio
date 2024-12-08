@@ -26,6 +26,7 @@ export default function Home() {
             typeSpeed={40}
             deleteSpeed={50}
             delayBetweenWords={2000}
+            asElement="h1"
           />
         </div>
       </main>

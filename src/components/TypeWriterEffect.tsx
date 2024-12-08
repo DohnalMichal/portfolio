@@ -2,7 +2,7 @@
 
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 
 interface WordConfig {
   text: string;
@@ -29,6 +29,11 @@ interface TypewriterProps {
    * @default 2000ms
    */
   delayBetweenWords?: number;
+  /**
+   * Element to render as
+   * @default "div"
+   */
+  asElement?: keyof JSX.IntrinsicElements;
 }
 
 export const TypewriterRotating = ({
@@ -39,6 +44,7 @@ export const TypewriterRotating = ({
   typeSpeed = 100,
   deleteSpeed = 50,
   delayBetweenWords = 2000,
+  asElement: Element = "div",
 }: TypewriterProps) => {
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -94,7 +100,7 @@ export const TypewriterRotating = ({
   const rotatingSegment = displayedText.slice(stableLength);
 
   return (
-    <div
+    <Element
       className={cn(
         "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-left",
         className
@@ -119,6 +125,6 @@ export const TypewriterRotating = ({
           cursorClassName
         )}
       />
-    </div>
+    </Element>
   );
 };
