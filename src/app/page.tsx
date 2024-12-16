@@ -9,7 +9,6 @@ const STABLE_WORDS = [
   { text: "with" },
 ];
 
-// Words to rotate through for the last position
 const ROTATING_WORDS = [
   { text: "React.", className: "text-blue-500" },
   { text: "Next.js.", className: "text-blue-500" },

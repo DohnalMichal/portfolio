@@ -1,12 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { MeteorLine } from "./MeteorLine";
 
 const ITEMS = [
   {
+    logo: "/d-icon.svg",
     company: "Direct",
+    companyFull: "Direct Pojišťovna",
     role: "Frontend Developer",
     date: "Aug 2024 - Present",
     place: "Brno, Czech Republic",
@@ -16,6 +20,7 @@ const ITEMS = [
     ],
   },
   {
+    logo: "/maptiler.png",
     company: "MapTiler",
     role: "Frontend Developer",
     date: "Nov 2022 - Jul 2024",
@@ -27,6 +32,7 @@ const ITEMS = [
     ],
   },
   {
+    logo: "/inqool.png",
     company: "InQool",
     role: "Frontend Developer",
     date: "Apr 2021 - Oct 2022",
@@ -37,6 +43,7 @@ const ITEMS = [
     ],
   },
   {
+    logo: "/ibm.png",
     company: "IBM",
     role: "Intern",
     date: "Oct 2020 - Feb 2021",
@@ -55,6 +62,8 @@ const WorkExperience = () => {
   return (
     <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-2 mt-12 max-w-2xl mx-auto">
       <div className="flex flex-row md:flex-col relative overflow-x-auto md:overflow-x-visible gap-2">
+        <MeteorLine height={220} />
+
         {ITEMS.map((item, index) => (
           <div
             key={item.company}
@@ -82,11 +91,21 @@ const WorkExperience = () => {
             <div className="relative">
               <button
                 className={cn(
-                  "px-4 py-2 text-gray-300 relative z-20 min-w-28 w-full text-left rounded-md flex flex-row space-x-2 items-center group cursor-pointer",
+                  "px-4 py-2 text-gray-300 relative z-20 min-w-28 w-full text-left rounded-md flex flex-row space-x-2 gap-3 items-center group cursor-pointer",
                   selectedCompany.company === item.company && "bg-gray-800"
                 )}
                 onClick={() => setSelectedCompany(item)}
               >
+                <div className="h-6 w-6 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-700 to-gray-800">
+                  <Image
+                    alt={item.company}
+                    src={item.logo}
+                    loading="lazy"
+                    width={16}
+                    height={16}
+                    className="flex-shrink-0 aspect-square object-contain transition duration-200"
+                  />
+                </div>
                 {item.company}
               </button>
             </div>
@@ -97,7 +116,9 @@ const WorkExperience = () => {
         <div className="flex flex-col space-y-4">
           <h3 className="text-2xl font-bold text-gray-100">
             {selectedCompany.role}{" "}
-            <span className="text-blue-500">@ {selectedCompany.company}</span>
+            <span className="text-blue-500">
+              @ {selectedCompany.companyFull ?? selectedCompany.company}
+            </span>
           </h3>
           <p className="text-gray-300 text-sm tracking-widest">
             {selectedCompany.date}
