@@ -28,7 +28,7 @@ function addVariablesForColors({
 }) {
   const allColors = flattenColorPalette(theme("colors"));
   const newVars: Record<string, string> = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, String(val)])
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, String(val)]),
   );
 
   addBase({

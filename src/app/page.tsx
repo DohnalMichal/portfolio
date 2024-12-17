@@ -1,3 +1,4 @@
+import { ProjectsCards } from "@/components/ProjectsCards";
 import { TypewriterRotating } from "@/components/TypeWriterEffect";
 import { WorkExperience } from "@/components/WorkExperience";
 
@@ -19,7 +20,7 @@ export default function Home() {
   return (
     <>
       <main className="min-h-screen antialiased">
-        <div className="max-w-5xl mx-auto mt-10 md:mt-20 px-8">
+        <div className="mx-auto mt-10 max-w-5xl px-8 md:mt-20">
           <TypewriterRotating
             stableWords={STABLE_WORDS}
             rotatingWords={ROTATING_WORDS}
@@ -29,7 +30,7 @@ export default function Home() {
             asElement="h1"
           />
 
-          <p className="text-gray-300 text-sm md:text-base max-w-2xl mt-8 leading-loose tracking-wide">
+          <p className="mt-8 max-w-2xl text-sm leading-loose tracking-wide text-gray-300 md:text-base">
             I&apos;m Michal Dohnal, a passionate Frontend Developer with
             extensive experience in building dynamic, user-centric web
             applications. Skilled in React, Next.js, TypeScript, and Tailwind
@@ -38,14 +39,21 @@ export default function Home() {
             to crafting map-editing tools.
           </p>
         </div>
-        <div className="max-w-5xl mx-auto mt-10 md:mt-20 px-8">
-          <h2 className="sm:text-lg md:text-2xl lg:text-3xl text-gray-300 font-bold">
+        <div className="mx-auto mt-10 max-w-5xl px-8 md:mt-20">
+          <h2 className="font-bold text-gray-300 sm:text-lg md:text-2xl lg:text-3xl">
             Work experience
           </h2>
           <WorkExperience />
         </div>
+
+        <div className="mx-auto mt-10 max-w-5xl px-8 md:mt-20">
+          <h2 className="font-bold text-gray-300 sm:text-lg md:text-2xl lg:text-3xl">
+            Projects
+          </h2>
+          <ProjectsCards />
+        </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
+      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6"></footer>
     </>
   );
 }

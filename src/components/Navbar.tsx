@@ -15,24 +15,24 @@ const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-row items-center justify-between sm:justify-between py-8 max-w-5xl mx-auto relative z-[100] px-8 ">
-      <div className="flex flex-row space-x-8 items-center border px-4 py-2 rounded-2xl border-gray-700/60 bg-gray-800">
+    <div className="relative z-[100] mx-auto flex max-w-5xl flex-row items-center justify-between px-8 py-8 sm:justify-between">
+      <div className="flex flex-row items-center space-x-8 rounded-2xl border border-gray-700/60 bg-gray-800 px-4 py-2">
         <Link
           href="/"
-          className="text-sm flex items-center justify-center text-white space-x-2"
+          className="flex items-center justify-center space-x-2 text-sm text-white"
         >
           <Image
             src="/me.jpeg"
             width={30}
             height={30}
             alt="Michal Dohnal"
-            className="transition duration-500 blur-0 scale-100 rounded-full"
+            className="scale-100 rounded-full blur-0 transition duration-500"
           />
           <span className="font-inter font-bold">Michal Dohnal</span>
         </Link>
         {LINKS.map((link, index) => (
           <Link
-            className="text-white text-sm group block p-2 relative"
+            className="group relative block p-2 text-sm text-white"
             key={link.href}
             href={link.href}
             onMouseEnter={() => setHoveredIndex(index)}
@@ -41,7 +41,7 @@ const Navbar = () => {
             <AnimatePresence>
               {hoveredIndex === index && (
                 <motion.span
-                  className="absolute inset-0 h-full w-full bg-gray-700 block rounded-xl"
+                  className="absolute inset-0 block h-full w-full rounded-xl bg-gray-700"
                   layoutId="hoverBackground"
                   initial={{ opacity: 0 }}
                   animate={{
@@ -55,7 +55,7 @@ const Navbar = () => {
                 />
               )}
             </AnimatePresence>
-            <div className="z-20 relative text-white">{link.label}</div>
+            <div className="relative z-20 text-white">{link.label}</div>
           </Link>
         ))}
       </div>

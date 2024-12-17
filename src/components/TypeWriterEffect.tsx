@@ -77,7 +77,7 @@ export const TypewriterRotating = ({
         // Move to next rotating word and restart typing
         setIsDeleting(false);
         setCurrentRotatingIndex(
-          (prevIndex) => (prevIndex + 1) % rotatingWords.length
+          (prevIndex) => (prevIndex + 1) % rotatingWords.length,
         );
       }
     }
@@ -102,8 +102,8 @@ export const TypewriterRotating = ({
   return (
     <Element
       className={cn(
-        "text-base sm:text-xl md:text-3xl lg:text-5xl lg:h-24 font-bold text-left",
-        className
+        "text-left text-base font-bold sm:text-xl md:text-3xl lg:h-24 lg:text-5xl",
+        className,
       )}
     >
       {stableSegment}
@@ -121,8 +121,8 @@ export const TypewriterRotating = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-500",
-          cursorClassName
+          "inline-block h-4 w-[4px] rounded-sm bg-blue-500 md:h-6 lg:h-10",
+          cursorClassName,
         )}
       />
     </Element>

@@ -22,7 +22,7 @@ const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
 
   return (
     <div
-      className="absolute -left-6 w-px bg-zinc-800 overflow-hidden"
+      className="absolute -left-6 w-px overflow-hidden bg-zinc-800"
       style={{ height }}
     >
       <svg
@@ -54,7 +54,6 @@ const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
               ease: "easeInOut",
               repeat: Infinity,
               delay,
-              repeatDelay: Math.random() * 2 + 3,
             }}
           >
             <stop stopColor="#18CCFC" stopOpacity="0" />

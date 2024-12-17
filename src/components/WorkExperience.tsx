@@ -60,21 +60,21 @@ const WorkExperience = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-2 mt-12 max-w-2xl mx-auto">
-      <div className="flex flex-row md:flex-col relative overflow-x-auto md:overflow-x-visible gap-2">
+    <div className="mx-auto mt-12 flex max-w-2xl flex-col space-y-4 md:flex-row md:space-x-2 md:space-y-0">
+      <div className="relative flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-x-visible">
         <MeteorLine height={220} />
 
         {ITEMS.map((item, index) => (
           <div
             key={item.company}
-            className="group block relative"
+            className="group relative block"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <AnimatePresence>
               {hoveredIndex === index && (
                 <motion.span
-                  className="absolute inset-0 h-full w-full bg-gray-800 block rounded-md"
+                  className="absolute inset-0 block h-full w-full rounded-md bg-gray-800"
                   layoutId="hoverBackground"
                   initial={{ opacity: 0 }}
                   animate={{
@@ -91,19 +91,19 @@ const WorkExperience = () => {
             <div className="relative">
               <button
                 className={cn(
-                  "px-4 py-2 text-gray-300 relative z-20 min-w-28 w-full text-left rounded-md flex flex-row space-x-2 gap-3 items-center group cursor-pointer",
-                  selectedCompany.company === item.company && "bg-gray-800"
+                  "group relative z-20 flex w-full min-w-28 cursor-pointer flex-row items-center gap-3 space-x-2 rounded-md px-4 py-2 text-left text-gray-300",
+                  selectedCompany.company === item.company && "bg-gray-800",
                 )}
                 onClick={() => setSelectedCompany(item)}
               >
-                <div className="h-6 w-6 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-700 to-gray-800">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-gray-700 to-gray-800">
                   <Image
                     alt={item.company}
                     src={item.logo}
                     loading="lazy"
                     width={16}
                     height={16}
-                    className="flex-shrink-0 aspect-square object-contain transition duration-200"
+                    className="aspect-square flex-shrink-0 object-contain transition duration-200"
                   />
                 </div>
                 {item.company}
@@ -112,15 +112,15 @@ const WorkExperience = () => {
           </div>
         ))}
       </div>
-      <div className="md:pl-10 flex-1">
+      <div className="flex-1 md:pl-10">
         <div className="flex flex-col space-y-4">
-          <h3 className="text-2xl font-bold text-gray-100">
+          <h3 className="text-2xl font-bold text-gray-100 sm:text-lg md:text-xl">
             {selectedCompany.role}{" "}
             <span className="text-blue-500">
               @ {selectedCompany.companyFull ?? selectedCompany.company}
             </span>
           </h3>
-          <p className="text-gray-300 text-sm tracking-widest">
+          <p className="text-sm tracking-widest text-gray-300">
             {selectedCompany.date}
             <br />
             {selectedCompany.place}
@@ -130,9 +130,9 @@ const WorkExperience = () => {
           {selectedCompany.bullets.map((bullet, index) => (
             <div
               key={index}
-              className="flex flex-row space-x-2 items-start text-sm"
+              className="flex flex-row items-start space-x-2 text-sm"
             >
-              <div className="mt-4 min-w-2 min-h-2 bg-blue-500 rounded-full" />
+              <div className="mt-4 min-h-2 min-w-2 rounded-full bg-blue-500" />
               <p className="mt-2 text-gray-300">{bullet}</p>
             </div>
           ))}
