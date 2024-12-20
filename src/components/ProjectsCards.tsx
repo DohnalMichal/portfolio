@@ -13,13 +13,14 @@ import {
   siOpenai,
   SimpleIcon,
   siGithub,
+  siPrisma,
 } from "simple-icons/icons";
 import { Icon } from "./Icon";
 
 type ProjectType = {
   title: string;
   description: string;
-  link: string;
+  link?: string;
   github: string;
   technologies: SimpleIcon[];
 };
@@ -31,7 +32,14 @@ const PROJECTS: ProjectType[] = [
       "A Next.js application powered by OpenAI for tracking daily emotions and experiences through journal entries, with integrated sentiment analysis, question answering, and graphical visualization.",
     link: "https://ai-mood-journal-psi.vercel.app/",
     github: "https://github.com/DohnalMichal/ai-mood-journal",
-    technologies: [siNextdotjs, siOpenai, siTypescript, siTailwindcss, siReact],
+    technologies: [
+      siNextdotjs,
+      siOpenai,
+      siTypescript,
+      siTailwindcss,
+      siReact,
+      siPrisma,
+    ],
   },
   {
     title: "CSS Tricks Cards",
@@ -42,11 +50,10 @@ const PROJECTS: ProjectType[] = [
     technologies: [siCss3],
   },
   {
-    title: "Placeholder Project",
-    description: "Lorem ipsum",
-    link: "",
-    github: "",
-    technologies: [siReact, siTailwindcss],
+    title: "First React Project",
+    description: "Simple React project with TypeScript",
+    github: "https://github.com/DohnalMichal/first-react-project",
+    technologies: [siReact, siTypescript],
   },
 ];
 
@@ -61,9 +68,8 @@ export const ProjectsCards = ({ className }: { className?: string }) => {
       )}
     >
       {PROJECTS.map((item, idx) => (
-        <Link
-          href={item?.link}
-          key={item?.link}
+        <div
+          key={item.title}
           className="group relative block h-full w-full p-2"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -86,8 +92,21 @@ export const ProjectsCards = ({ className }: { className?: string }) => {
             )}
           </AnimatePresence>
           <Card>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
+            {item.link ? (
+              <Link href={item.link} target="_blank" rel="noopener noreferrer">
+                <h4 className="mt-4 font-bold tracking-wide text-gray-100 hover:text-blue-500">
+                  {item.title}
+                </h4>
+              </Link>
+            ) : (
+              <h4 className="mt-4 font-bold tracking-wide text-gray-100">
+                {item.title}
+              </h4>
+            )}
+
+            <p className="mt-8 text-sm leading-relaxed tracking-wide text-gray-400">
+              {item.description}
+            </p>
             <div className="mt-4 flex flex-row gap-2">
               {item.technologies.map((tech) => (
                 <Icon
@@ -110,7 +129,7 @@ export const ProjectsCards = ({ className }: { className?: string }) => {
               View source
             </Link>
           </Card>
-        </Link>
+        </div>
       ))}
     </div>
   );
@@ -134,38 +153,5 @@ export const Card = ({
         <div className="p-4">{children}</div>
       </div>
     </div>
-  );
-};
-
-export const CardTitle = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) => {
-  return (
-    <h4 className={cn("mt-4 font-bold tracking-wide text-gray-100", className)}>
-      {children}
-    </h4>
-  );
-};
-
-export const CardDescription = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) => {
-  return (
-    <p
-      className={cn(
-        "mt-8 text-sm leading-relaxed tracking-wide text-gray-400",
-        className,
-      )}
-    >
-      {children}
-    </p>
   );
 };
