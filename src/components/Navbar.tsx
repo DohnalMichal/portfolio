@@ -1,15 +1,10 @@
 "use client";
 
+import { LINKS } from "@/data/links";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-const LINKS = [
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blogs", label: "Blogs" },
-];
 
 const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -28,7 +23,9 @@ const Navbar = () => {
             alt="Michal Dohnal"
             className="scale-100 rounded-full blur-0 transition duration-500"
           />
-          <span className="font-inter font-bold">Michal Dohnal</span>
+          <span className="font-inter text-nowrap font-bold">
+            Michal Dohnal
+          </span>
         </Link>
         {LINKS.map((link, index) => (
           <Link

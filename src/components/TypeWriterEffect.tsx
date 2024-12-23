@@ -11,7 +11,7 @@ interface WordConfig {
 
 interface TypewriterProps {
   stableWords: WordConfig[];
-  rotatingWords: WordConfig[];
+  rotatingWords?: WordConfig[];
   className?: string;
   cursorClassName?: string;
   /**
@@ -51,7 +51,8 @@ export const TypewriterRotating = ({
   const [currentRotatingIndex, setCurrentRotatingIndex] = useState(0);
 
   const stableSentence = stableWords.map((word) => word.text).join(" ") + " ";
-  const currentRotatingWord = rotatingWords[currentRotatingIndex].text;
+  const currentRotatingWord =
+    rotatingWords && rotatingWords[currentRotatingIndex].text;
   const fullText = stableSentence + currentRotatingWord;
 
   useEffect(() => {
@@ -76,8 +77,12 @@ export const TypewriterRotating = ({
       } else {
         // Move to next rotating word and restart typing
         setIsDeleting(false);
+        const nextRotatingIndex = rotatingWords?.length
+          ? rotatingWords.length
+          : 0;
+
         setCurrentRotatingIndex(
-          (prevIndex) => (prevIndex + 1) % rotatingWords.length,
+          (prevIndex) => (prevIndex + 1) % nextRotatingIndex,
         );
       }
     }
@@ -91,7 +96,7 @@ export const TypewriterRotating = ({
     typeSpeed,
     deleteSpeed,
     delayBetweenWords,
-    rotatingWords.length,
+    rotatingWords?.length,
   ]);
 
   // Separate the displayed text into stable and rotating segments
@@ -99,16 +104,38 @@ export const TypewriterRotating = ({
   const stableSegment = displayedText.slice(0, stableLength);
   const rotatingSegment = displayedText.slice(stableLength);
 
+  const stableOutput = (() => {
+    let offset = 0;
+
+    return stableWords.map((sw, index) => {
+      const wordWithSpace = sw.text + " ";
+      const endOffset = offset + wordWithSpace.length;
+      const typedPart = stableSegment.slice(offset, endOffset);
+      offset = endOffset;
+
+      return (
+        <span key={`stable-word-${index}`} className={cn(sw.className)}>
+          {typedPart}
+        </span>
+      );
+    });
+  })();
+
   return (
     <Element
       className={cn(
-        "text-left text-base font-bold sm:text-xl md:text-3xl lg:h-24 lg:text-5xl",
+        "text-left text-base font-bold sm:text-xl md:text-4xl lg:h-24 lg:text-5xl",
         className,
       )}
     >
-      {stableSegment}
-      {rotatingSegment && (
-        <span className={cn(rotatingWords[currentRotatingIndex].className)}>
+      {stableOutput}
+
+      {rotatingSegment && rotatingWords && (
+        <span
+          className={cn(
+            rotatingWords && rotatingWords[currentRotatingIndex].className,
+          )}
+        >
           {rotatingSegment}
         </span>
       )}

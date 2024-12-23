@@ -1,6 +1,8 @@
 import { ProjectsCards } from "@/components/ProjectsCards";
 import { TypewriterRotating } from "@/components/TypeWriterEffect";
 import { WorkExperience } from "@/components/WorkExperience";
+import { PROJECTS } from "@/data/projects";
+import { WORK_EXPERIENCE_ITEMS } from "@/data/workExperience";
 
 const STABLE_WORDS = [
   { text: "Creating" },
@@ -43,17 +45,16 @@ export default function Home() {
           <h2 className="font-bold text-gray-300 sm:text-lg md:text-2xl lg:text-3xl">
             Work experience
           </h2>
-          <WorkExperience />
+          <WorkExperience items={WORK_EXPERIENCE_ITEMS} />
         </div>
 
         <div className="mx-auto mt-10 max-w-5xl px-8 md:mt-20">
           <h2 className="font-bold text-gray-300 sm:text-lg md:text-2xl lg:text-3xl">
             Projects
           </h2>
-          <ProjectsCards />
+          <ProjectsCards items={PROJECTS} />
         </div>
       </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6"></footer>
     </>
   );
 }

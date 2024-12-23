@@ -3,6 +3,7 @@ import "./globals.css";
 import { BackgroundBeams } from "@/components/BackgroundBeams";
 import { Navbar } from "@/components/Navbar";
 import { Inter } from "next/font/google";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-900 antialiased`}>
         <Navbar />
         {children}
+        <Footer />
         <BackgroundBeams />
       </body>
     </html>
