@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import typography from "@tailwindcss/typography";
+import { blockquote } from "framer-motion/client";
 
 const config: Config = {
   content: [
@@ -8,15 +10,48 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/data/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  corePlugins: {
+    preflight: true,
+  },
   theme: {
+    fontFamily: {
+      mono: ["Menlo", "Consolas", "monospace"],
+    },
     extend: {
+      typography: (theme: (value: string) => void) => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.gray.300"),
+            h1: {
+              color: theme("colors.gray.100"),
+            },
+            h2: {
+              color: theme("colors.gray.100"),
+            },
+            h3: {
+              color: theme("colors.gray.100"),
+            },
+            a: {
+              color: theme("colors.blue.500"),
+              textDecoration: "none",
+              "&:hover": {
+                color: theme("colors.blue.400"),
+              },
+            },
+            blockquote: {
+              color: theme("colors.gray.300"),
+              fontStyle: "normal",
+            },
+          },
+        },
+      }),
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [addVariablesForColors, typography],
 };
 
 function addVariablesForColors({

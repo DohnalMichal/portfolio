@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const Navbar = () => {
+export const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -59,5 +59,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export { Navbar };

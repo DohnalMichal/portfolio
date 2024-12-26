@@ -17,11 +17,11 @@ const STABLE_WORDS = [
   { text: "Developer." },
 ];
 
-export default function Page() {
+export default function AboutPage() {
   return (
     <main className="min-h-screen antialiased">
       <div className="relative mx-auto flex max-w-5xl flex-col justify-between space-y-10 px-8 md:mt-20 md:flex-row md:space-x-10 md:space-y-0">
-        <div className="flex flex-col text-sm font-light leading-loose tracking-wide text-gray-300 md:text-base">
+        <div className="flex flex-col text-sm leading-loose tracking-wide text-gray-300 md:text-base">
           <TypewriterRotating
             stableWords={STABLE_WORDS}
             typeSpeed={40}
@@ -44,11 +44,12 @@ export default function Page() {
             I built a strong foundation in programming and technology at the
             Secondary Technical School Purkyňova, where I specialized in
             Graphics and Web Design during my later years. After graduating, I
-            pursued Informatics at Masaryk University, completing coursework in
-            Python, Haskell, and C programming. During this time, I gained
-            hands-on experience through an internship at <strong>IBM</strong>,
-            where I contributed to building components for internal dashboards
-            and further solidified my programming fundamentals.
+            pursued Informatics at <strong>Masaryk University</strong>,
+            completing coursework in Python, Haskell, and C programming. During
+            this time, I gained hands-on experience through an internship at{" "}
+            <strong>IBM</strong>, where I contributed to building components for
+            internal dashboards and further solidified my programming
+            fundamentals.
           </p>
           <p className="mt-8 max-w-2xl">
             My professional career began with part-time React development while
@@ -64,8 +65,8 @@ export default function Page() {
             Beyond coding, I’m a dedicated home barista, a former national-level
             rower who transitioned to amateur bodybuilding and later to
             powerlifting, and a travel enthusiast. These passions shape my
-            attention to detail, perseverance, and creativity—qualities I bring
-            to both my personal and professional life.
+            attention to detail, perseverance, and creativity – qualities I
+            bring to both my personal and professional life.
           </p>
         </div>
 

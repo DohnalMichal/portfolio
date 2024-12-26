@@ -22,7 +22,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef as RefObject<HTMLDivElement>,
-    offset: ["start 20%", "end 90%"],
+    offset: ["start 10%", "end 90%"],
   });
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
