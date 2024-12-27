@@ -39,7 +39,7 @@ export const ArticleLink = ({
             exit={{
               opacity: 0,
               scale: 0.9,
-              transition: { duration: 0.15, delay: 0.2 },
+              transition: { duration: 0.15 },
             }}
             className="absolute inset-0 h-full w-full rounded-lg bg-gray-800"
           />

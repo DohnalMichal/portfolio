@@ -83,12 +83,14 @@ export const CodeBlock = ({
             ))}
           </div>
         )}
-        {!tabsExist && filename && (
+        {!tabsExist && (
           <div className="flex items-center justify-between py-2">
-            <div className="text-xs text-gray-400">{filename}</div>
+            {filename && (
+              <div className="text-xs text-gray-400">{filename}</div>
+            )}
             <button
               onClick={copyToClipboard}
-              className="flex items-center gap-1 font-sans text-xs text-gray-400 transition-colors hover:text-gray-200"
+              className="ml-auto flex items-center gap-1 font-sans text-xs text-gray-400 transition-colors hover:text-gray-200"
             >
               {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
             </button>
