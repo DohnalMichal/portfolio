@@ -1,5 +1,9 @@
 import { ArticleLink } from "@/components/ArticleLink";
-import { ARTICLES } from "@/data/articles";
+import { ARTICLES, type Article } from "@/data/articles";
+
+const sortByDate = (a: Article, b: Article): number => {
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+};
 
 export default function BlogPage() {
   return (
@@ -13,7 +17,7 @@ export default function BlogPage() {
         </p>
         <div className="mx-auto mt-20">
           <div className="flex max-w-3xl flex-col space-y-16">
-            {ARTICLES.map((article) => (
+            {ARTICLES.sort(sortByDate).map((article) => (
               <ArticleLink
                 key={article.id}
                 href={`/blog/${article.slug}`}
