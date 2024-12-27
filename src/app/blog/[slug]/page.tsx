@@ -4,9 +4,9 @@ import { format } from "date-fns";
 import { notFound } from "next/navigation";
 
 type ArticlePageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
