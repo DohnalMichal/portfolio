@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { HomeLink } from "./HomeLink";
 import { CircleX, Menu } from "lucide-react";
+import { ActionButton } from "./ActionButton";
 
 export const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -13,6 +14,13 @@ export const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+  };
+
+  const downloadCV = () => {
+    const link = document.createElement("a");
+    link.href = "/Michal_Dohnal_CV.pdf"; // file in 'public' folder
+    link.download = "Michal_Dohnal_CV.pdf";
+    link.click();
   };
 
   return (
@@ -49,6 +57,9 @@ export const Navbar = () => {
           </Link>
         ))}
       </nav>
+      <ActionButton className="hidden h-[54px] md:flex" onClick={downloadCV}>
+        Download CV
+      </ActionButton>
       {/* Mobile */}
       <div className="flex w-full justify-between md:hidden">
         <HomeLink />
@@ -108,6 +119,19 @@ export const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                variants={{
+                  hidden: { x: -50, opacity: 0 },
+                  show: { x: 0, opacity: 1 },
+                }}
+              >
+                <ActionButton
+                  className="mt-10 h-[54px] md:hidden"
+                  onClick={downloadCV}
+                >
+                  Download CV
+                </ActionButton>
+              </motion.div>
             </motion.nav>
           </motion.div>
         )}
