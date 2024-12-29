@@ -2,31 +2,24 @@
 
 import { LINKS } from "@/data/links";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { HomeLink } from "./HomeLink";
+import { CircleX, Menu } from "lucide-react";
 
 export const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   return (
     <div className="relative z-[100] mx-auto flex max-w-5xl flex-row items-center justify-between px-8 py-8 sm:justify-between">
-      <div className="flex flex-row items-center space-x-8 rounded-2xl border border-gray-700/60 bg-gray-800 px-4 py-2">
-        <Link
-          href="/"
-          className="flex items-center justify-center space-x-2 text-sm text-white"
-        >
-          <Image
-            src="/me.jpeg"
-            width={30}
-            height={30}
-            alt="Michal Dohnal"
-            className="scale-100 rounded-full blur-0 transition duration-500"
-          />
-          <span className="font-inter text-nowrap font-bold">
-            Michal Dohnal
-          </span>
-        </Link>
+      {/* Desktop */}
+      <nav className="hidden flex-row items-center space-x-8 rounded-2xl border border-gray-700/60 bg-gray-800 px-4 py-2 md:flex">
+        <HomeLink />
         {LINKS.map((link, index) => (
           <Link
             className="group relative block p-2 text-sm text-white"
@@ -55,7 +48,70 @@ export const Navbar = () => {
             <div className="relative z-20 text-white">{link.label}</div>
           </Link>
         ))}
+      </nav>
+      {/* Mobile */}
+      <div className="flex w-full justify-between md:hidden">
+        <HomeLink />
+        <button
+          className="h-6 w-6 cursor-pointer text-gray-100 transition-all duration-100 hover:text-gray-400"
+          onClick={toggleMenu}
+        >
+          <Menu />
+        </button>
       </div>
+
+      {/* Mobile fullscreen Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gray-900"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button
+              className="absolute right-8 top-8 h-6 w-6 text-gray-100 transition-all duration-100 hover:text-gray-400"
+              onClick={toggleMenu}
+            >
+              <CircleX />
+            </button>
+
+            <motion.nav
+              className="flex flex-col items-center space-y-6"
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.06,
+                  },
+                },
+              }}
+            >
+              {LINKS.map((link) => (
+                <motion.div
+                  key={link.href}
+                  variants={{
+                    hidden: { x: -50, opacity: 0 },
+                    show: { x: 0, opacity: 1 },
+                  }}
+                >
+                  <Link
+                    href={link.href}
+                    className="text-xl font-bold text-gray-100 transition-all duration-100 hover:text-gray-400"
+                    onClick={toggleMenu}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
