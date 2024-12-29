@@ -49,7 +49,10 @@ export default function Home() {
         </div>
 
         <div className="mx-auto mt-10 max-w-5xl px-8 md:mt-20">
-          <h2 className="font-bold text-gray-300 sm:text-lg md:text-2xl lg:text-3xl">
+          <h2
+            id="projects"
+            className="font-bold text-gray-300 sm:text-lg md:text-2xl lg:text-3xl"
+          >
             Projects
           </h2>
           <ProjectsCards items={PROJECTS} />

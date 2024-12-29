@@ -25,17 +25,18 @@ export const PROJECTS = [
     ],
   },
   {
+    title: "Personal Portfolio",
+    description:
+      "My personal portfolio website, built with Next.js and Tailwind CSS.",
+    github: "https://github.com/DohnalMichal/portfolio",
+    icons: [siNextdotjs, siReact, siTailwindcss, siTypescript],
+  },
+  {
     title: "CSS Tricks Cards",
     description:
       "One of my very first project, a collection of cards, copying style of cards on css-tricks.com",
     link: "https://dohnalmichal.github.io/CSS-Tricks-cards/",
     github: "https://github.com/DohnalMichal/CSS-Tricks-cards",
     icons: [siCss3],
-  },
-  {
-    title: "First React Project",
-    description: "Simple React project with TypeScript",
-    github: "https://github.com/DohnalMichal/first-react-project",
-    icons: [siReact, siTypescript],
   },
 ];

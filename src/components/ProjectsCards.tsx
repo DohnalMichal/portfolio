@@ -56,7 +56,7 @@ export const ProjectsCards = ({ items, className }: Props) => {
           </AnimatePresence>
           <Card>
             {item.link ? (
-              <Link href={item.link} target="_blank" rel="noopener noreferrer">
+              <Link href={item.link}>
                 <h4 className="mt-4 font-bold tracking-wide text-gray-100 hover:text-blue-500">
                   {item.title}
                 </h4>
