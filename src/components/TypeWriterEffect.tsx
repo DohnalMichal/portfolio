@@ -124,7 +124,7 @@ export const TypewriterRotating = ({
   return (
     <Element
       className={cn(
-        "text-left text-base font-bold sm:text-xl md:text-4xl lg:h-24 lg:text-5xl",
+        "text-left text-base font-bold sm:text-xl md:text-4xl lg:text-5xl",
         className,
       )}
     >

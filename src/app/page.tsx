@@ -24,7 +24,7 @@ export default function Home() {
       <main className="min-h-screen antialiased">
         <div className="mx-auto mt-10 max-w-5xl px-8 md:mt-20">
           <TypewriterRotating
-            className="text-gray-100"
+            className="text-gray-100 md:min-h-20 lg:min-h-24"
             stableWords={STABLE_WORDS}
             rotatingWords={ROTATING_WORDS}
             typeSpeed={40}

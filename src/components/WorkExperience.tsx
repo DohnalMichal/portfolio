@@ -87,7 +87,7 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
             {selectedCompany.place}
           </p>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 min-h-36 md:min-h-48">
           {selectedCompany.bullets.map((bullet, index) => (
             <div
               key={index}

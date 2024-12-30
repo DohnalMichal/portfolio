@@ -50,7 +50,7 @@ export const ArticleLink = ({
           {format(new Date(date), "MMMM do yyyy")}
         </small>
 
-        <h2 className="mt-4 text-lg font-bold">{title}</h2>
+        <h2 className="mt-4 text-lg font-bold text-gray-100">{title}</h2>
         <p className="mt-2 max-w-4xl text-sm leading-loose text-gray-400">
           {description}
         </p>

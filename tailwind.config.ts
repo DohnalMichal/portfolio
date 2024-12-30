@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
 import typography from "@tailwindcss/typography";
-import { blockquote } from "framer-motion/client";
 
 const config: Config = {
   content: [
