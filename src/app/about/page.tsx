@@ -11,8 +11,7 @@ const STABLE_WORDS = [
   { text: "I'm" },
   { text: "Michal", className: "text-blue-500" },
   { text: "Dohnal", className: "text-blue-500" },
-  { text: "a" },
-  { text: "passionate" },
+  { text: "a passionate" },
   { text: "Frontend" },
   { text: "Developer." },
 ];

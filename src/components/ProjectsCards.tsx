@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 import { SimpleIcon, siGithub } from "simple-icons/icons";
 import { Icon } from "./Icon";
+import { Link as LinkIcon } from "lucide-react";
 
 type Item = {
   title: string;
@@ -55,42 +56,49 @@ export const ProjectsCards = ({ items, className }: Props) => {
             )}
           </AnimatePresence>
           <Card>
-            {item.link ? (
-              <Link href={item.link}>
-                <h4 className="mt-4 font-bold tracking-wide text-gray-100 hover:text-blue-500">
+            <div className="flex h-full flex-col justify-between">
+              <div>
+                <h4 className="mt-4 font-bold tracking-wide text-gray-100">
                   {item.title}
                 </h4>
-              </Link>
-            ) : (
-              <h4 className="mt-4 font-bold tracking-wide text-gray-100">
-                {item.title}
-              </h4>
-            )}
 
-            <p className="mt-8 text-sm leading-relaxed tracking-wide text-gray-400">
-              {item.description}
-            </p>
-            <div className="mt-4 flex flex-row gap-2">
-              {item.icons.map((tech) => (
-                <Icon
-                  key={tech.title}
-                  icon={tech}
-                  size={16}
-                  className="text-gray-400"
-                />
-              ))}
+                <p className="mt-8 text-sm leading-relaxed tracking-wide text-gray-400">
+                  {item.description}
+                </p>
+                <div className="mt-4 flex flex-row gap-2">
+                  {item.icons.map((tech) => (
+                    <Icon
+                      key={tech.title}
+                      icon={tech}
+                      size={16}
+                      className="text-gray-400"
+                    />
+                  ))}
+                </div>
+              </div>
+              <div>
+                {item.link && (
+                  <Link
+                    href={item.link}
+                    className="group flex max-w-fit flex-row items-center gap-2 pt-8 text-sm text-gray-400 hover:text-gray-500"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LinkIcon size={16} />
+                    View live
+                  </Link>
+                )}
+                <Link
+                  href={item.github}
+                  className="group flex max-w-fit flex-row items-center gap-2 pt-2 text-sm text-gray-400 hover:text-gray-500"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon icon={siGithub} size={16} />
+                  View source
+                </Link>
+              </div>
             </div>
-
-            <Link
-              href={item.github}
-              className="group mt-8 flex max-w-fit flex-row items-center gap-2 text-sm text-gray-400 hover:text-gray-500"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Icon icon={siGithub} size={16} />
-              View source
-            </Link>
           </Card>
         </div>
       ))}
@@ -112,8 +120,8 @@ export const Card = ({
         className,
       )}
     >
-      <div className="relative z-50">
-        <div className="p-4">{children}</div>
+      <div className="relative z-50 h-full">
+        <div className="h-full p-4">{children}</div>
       </div>
     </div>
   );
