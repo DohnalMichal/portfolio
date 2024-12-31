@@ -59,7 +59,7 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
               >
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-gray-700 to-gray-800">
                   <Image
-                    alt={item.company}
+                    alt={`${item.company} logo`}
                     src={item.logo}
                     loading="lazy"
                     width={16}

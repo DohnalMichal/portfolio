@@ -11,8 +11,8 @@ export const HomeLink = () => {
         src="/me.jpeg"
         width={30}
         height={30}
-        alt="Michal Dohnal"
-        className="scale-100 rounded-full blur-0 transition duration-500"
+        alt="Author photo"
+        className="scale-100 rounded-full object-cover blur-0 transition duration-500"
       />
       <span className="font-inter text-nowrap font-bold">Michal Dohnal</span>
     </Link>

@@ -58,9 +58,9 @@ export const ProjectsCards = ({ items, className }: Props) => {
           <Card>
             <div className="flex h-full flex-col justify-between">
               <div>
-                <h4 className="mt-4 font-bold tracking-wide text-gray-100">
+                <h3 className="mt-4 font-bold tracking-wide text-gray-100">
                   {item.title}
-                </h4>
+                </h3>
 
                 <p className="mt-8 text-sm leading-relaxed tracking-wide text-gray-400">
                   {item.description}

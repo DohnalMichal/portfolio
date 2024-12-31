@@ -18,7 +18,7 @@ export const Navbar = () => {
 
   const downloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/Michal_Dohnal_CV.pdf"; // file in 'public' folder
+    link.href = "/Michal_Dohnal_CV.pdf";
     link.download = "Michal_Dohnal_CV.pdf";
     link.click();
   };
@@ -64,6 +64,7 @@ export const Navbar = () => {
       <div className="flex w-full justify-between md:hidden">
         <HomeLink />
         <button
+          aria-label="menu"
           className="h-6 w-6 cursor-pointer text-gray-100 transition-all duration-100 hover:text-gray-400"
           onClick={toggleMenu}
         >

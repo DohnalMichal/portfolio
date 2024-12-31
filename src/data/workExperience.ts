@@ -1,6 +1,6 @@
 export const WORK_EXPERIENCE_ITEMS = [
   {
-    logo: "/d-icon.svg",
+    logo: "/companies/d-icon.svg",
     company: "Direct",
     companyFull: "Direct Pojišťovna",
     role: "Frontend Developer",
@@ -12,7 +12,7 @@ export const WORK_EXPERIENCE_ITEMS = [
     ],
   },
   {
-    logo: "/maptiler.png",
+    logo: "/companies/maptiler.png",
     company: "MapTiler",
     role: "Frontend Developer",
     date: "Nov 2022 - Jul 2024",
@@ -24,7 +24,7 @@ export const WORK_EXPERIENCE_ITEMS = [
     ],
   },
   {
-    logo: "/inqool.png",
+    logo: "/companies/inqool.png",
     company: "InQool",
     role: "Frontend Developer",
     date: "Apr 2021 - Oct 2022",
@@ -35,7 +35,7 @@ export const WORK_EXPERIENCE_ITEMS = [
     ],
   },
   {
-    logo: "/ibm.png",
+    logo: "/companies/ibm.png",
     company: "IBM",
     role: "Intern",
     date: "Oct 2020 - Feb 2021",
