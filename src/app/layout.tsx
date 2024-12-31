@@ -4,6 +4,7 @@ import { BackgroundBeams } from "@/components/BackgroundBeams";
 import { Navbar } from "@/components/Navbar";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -74,6 +75,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-gray-900 antialiased`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Z985XLXM5T"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-Z985XLXM5T');
+          `}
+        </Script>
         <Navbar />
         {children}
         <Footer />
