@@ -30,7 +30,7 @@ export const Footer = () => {
           </Link>
         ))}
       </div>
-      <p className="w-full max-w-fit border-t border-gray-700 pt-4 text-center text-gray-400">
+      <p className="w-full max-w-fit border-t border-gray-700 pt-4 text-center text-xs text-gray-400">
         © 2024 Michal Dohnal. All rights reserved.
       </p>
       <div className="flex gap-6">
