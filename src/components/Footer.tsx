@@ -15,9 +15,9 @@ export const Footer = () => {
           className="rounded-full"
           alt="Michal Dohnal"
         />
-        <h4 className="font-inter text-xl font-bold text-white">
+        <span className="font-inter text-xl font-bold text-white">
           Michal Dohnal
-        </h4>
+        </span>
       </div>
       <div className="flex flex-row gap-4">
         {LINKS.map((link) => (

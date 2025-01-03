@@ -72,7 +72,7 @@ export const CodeBlock = ({
                 key={index}
                 onClick={() => setActiveTab(index)}
                 className={cn(
-                  "!py-2 px-3 font-sans text-xs transition-colors",
+                  "font-sans !py-2 px-3 text-xs transition-colors",
                   activeTab === index
                     ? "text-white"
                     : "text-gray-400 hover:text-gray-200",
@@ -89,8 +89,9 @@ export const CodeBlock = ({
               <div className="text-xs text-gray-400">{filename}</div>
             )}
             <button
+              aria-label="Copy code to clipboard"
               onClick={copyToClipboard}
-              className="ml-auto flex items-center gap-1 font-sans text-xs text-gray-400 transition-colors hover:text-gray-200"
+              className="font-sans ml-auto flex items-center gap-1 text-xs text-gray-400 transition-colors hover:text-gray-200"
             >
               {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
             </button>
