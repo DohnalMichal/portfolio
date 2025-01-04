@@ -6,7 +6,7 @@ export const TIMELINE_DATA = [
     content: (
       <>
         <h3 className="text-2xl font-bold text-gray-100 sm:text-lg md:text-xl">
-          Senior Frontend Developer at Direct Pojišťovna
+          Frontend Developer at Direct Pojišťovna
         </h3>
         <p className="text-sm tracking-widest text-gray-400">
           Developing interactive web forms for insurance applications using

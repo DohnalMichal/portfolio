@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { BackgroundBeams } from "@/components/BackgroundBeams";
 import { Navbar } from "@/components/Navbar";
@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Michal Dohnal", url: "https://www.michaldohnal.dev/" }],
   creator: "Michal Dohnal",
   publisher: "Michal Dohnal",
-  themeColor: "#111827",
   manifest: "./manifest.json",
   icons: {
     icon: [
@@ -61,10 +60,13 @@ export const metadata: Metadata = {
     "msapplication-TileColor": "#111827",
     "msapplication-TileImage": "/favicon/ms-icon-144x144.png",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#111827",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
