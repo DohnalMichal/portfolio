@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -94,6 +95,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <BackgroundBeams />
+        <SpeedInsights />
       </body>
     </html>
   );
