@@ -1,10 +1,10 @@
+import Image from "next/image";
+import Link from "next/link";
+import { siGithub, siLinkedin } from "simple-icons";
 import { Icon } from "@/components/Icon";
 import { Timeline } from "@/components/Timeline";
 import { TypewriterRotating } from "@/components/TypeWriterEffect";
 import { TIMELINE_DATA } from "@/data/timeline";
-import Image from "next/image";
-import Link from "next/link";
-import { siGithub, siLinkedin } from "simple-icons";
 
 const STABLE_WORDS = [
   { text: "Hi!" },
@@ -63,9 +63,10 @@ export default function AboutPage() {
           <p className="mt-8 max-w-2xl">
             Beyond coding, I’m a dedicated home barista, a former national-level
             rower who transitioned to amateur bodybuilding and later to
-            powerlifting, and a travel enthusiast. These passions shape my
-            attention to detail, perseverance, and creativity – qualities I
-            bring to both my personal and professional life.
+            powerlifting, a motorcycle enthusiast currently riding a Kawasaki
+            Ninja 650, and a travel lover. These passions shape my attention to
+            detail, perseverance, and creativity – qualities I bring to both my
+            personal and professional life.
           </p>
         </div>
 
