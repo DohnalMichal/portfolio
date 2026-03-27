@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactCompiler: true,
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "@tabler/icons-react",
+      "framer-motion",
+    ],
+  },
 };
 
 export default nextConfig;

@@ -17,7 +17,7 @@ export default function BlogPage() {
         </p>
         <div className="mx-auto mt-20">
           <div className="flex max-w-3xl flex-col space-y-16">
-            {ARTICLES.sort(sortByDate).map((article) => (
+            {ARTICLES.toSorted(sortByDate).map((article) => (
               <ArticleLink
                 key={article.id}
                 href={`/blog/${article.slug}`}

@@ -42,7 +42,7 @@ export const ProjectsCards = ({ items, className }: Props) => {
             {hoveredIndex === idx && (
               <motion.span
                 className="absolute inset-0 block h-full w-full rounded-3xl bg-gray-700/[0.8]"
-                layoutId="hoverBackground"
+                layoutId="projects-hover"
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,

@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
+import { cn } from "@/utils/cn";
 import { MeteorLine } from "./MeteorLine";
 
 type Item = {
@@ -36,7 +36,7 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
               {hoveredIndex === index && (
                 <motion.span
                   className="absolute inset-0 block h-full w-full rounded-md bg-gray-800"
-                  layoutId="hoverBackground"
+                  layoutId="work-hover"
                   initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
@@ -88,9 +88,9 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
           </p>
         </div>
         <div className="mt-4 min-h-36 md:min-h-48">
-          {selectedCompany.bullets.map((bullet, index) => (
+          {selectedCompany.bullets.map((bullet) => (
             <div
-              key={index}
+              key={bullet}
               className="flex flex-row items-start space-x-2 text-sm"
             >
               <div className="mt-4 min-h-2 min-w-2 rounded-full bg-blue-500" />

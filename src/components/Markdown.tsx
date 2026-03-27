@@ -1,36 +1,32 @@
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { type Components } from "react-markdown";
 import { CodeBlock } from "./CodeBlock";
+
+const MARKDOWN_COMPONENTS: Components = {
+  code({ className, children, ...props }) {
+    const match = /language-(\w+)/.exec(className || "");
+
+    if (!match) {
+      // Inline code — no language class present
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
+    }
+
+    // Fenced code block — always has a language-xxx className
+    return (
+      <CodeBlock
+        language={match[1]}
+        filename=""
+        code={String(children).replace(/\n$/, "")}
+      />
+    );
+  },
+};
 
 export const Markdown = ({ content }: { content: string }) => {
   return (
-    <ReactMarkdown
-      components={{
-        code({ inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || "");
-          const language = match ? match[1] : "plaintext";
-
-          if (inline || !match) {
-            // It's an inline code block like `const a = 1;`
-            // Just render a basic <code> for inline usage:
-            return (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            );
-          }
-
-          // It's a fenced code block, e.g. ```js ... ```
-          return (
-            <CodeBlock
-              language={language}
-              filename={""}
-              code={String(children).replace(/\n$/, "")}
-            />
-          );
-        },
-      }}
-    >
-      {content}
-    </ReactMarkdown>
+    <ReactMarkdown components={MARKDOWN_COMPONENTS}>{content}</ReactMarkdown>
   );
 };

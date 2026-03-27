@@ -57,6 +57,12 @@ const PATHS = [
   "M-37 -581C-37 -581 31 -176 495 -49C959 78 1027 483 1027 483",
 ];
 
+const BEAM_ANIMATIONS = PATHS.map(() => ({
+  duration: Math.random() * 10 + 10,
+  delay: Math.random() * 10,
+  y2End: `${93 + Math.random() * 8}%`,
+}));
+
 export const BackgroundBeams = memo(({ className }: { className?: string }) => {
   return (
     <div
@@ -104,13 +110,13 @@ export const BackgroundBeams = memo(({ className }: { className?: string }) => {
                 x1: ["0%", "100%"],
                 x2: ["0%", "95%"],
                 y1: ["0%", "100%"],
-                y2: ["0%", `${93 + Math.random() * 8}%`],
+                y2: ["0%", BEAM_ANIMATIONS[index].y2End],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: BEAM_ANIMATIONS[index].duration,
                 ease: "easeInOut",
                 repeat: Infinity,
-                delay: Math.random() * 10,
+                delay: BEAM_ANIMATIONS[index].delay,
               }}
             >
               <stop stopColor="#18CCFC" stopOpacity="0" />

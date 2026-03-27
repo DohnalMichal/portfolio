@@ -12,6 +12,7 @@ export const HomeLink = () => {
         width={30}
         height={30}
         alt="Author photo"
+        priority
         className="scale-100 rounded-full object-cover blur-0 transition duration-500"
       />
       <span className="font-inter text-nowrap font-bold">Michal Dohnal</span>

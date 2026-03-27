@@ -40,7 +40,7 @@ export const Navbar = () => {
               {hoveredIndex === index && (
                 <motion.span
                   className="absolute inset-0 block h-full w-full rounded-xl bg-gray-700"
-                  layoutId="hoverBackground"
+                  layoutId="navbar-hover"
                   initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,

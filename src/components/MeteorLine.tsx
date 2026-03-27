@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { motion } from "framer-motion";
 
 type MeteorProps = {
@@ -18,6 +19,7 @@ type MeteorProps = {
 };
 
 const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
+  const gradientId = useId();
   const PATH = `M0.5 0 L0.5 ${height}`;
 
   return (
@@ -35,7 +37,7 @@ const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
       >
         <defs>
           <motion.linearGradient
-            id="linear_gradient_meteor"
+            id={gradientId}
             gradientUnits="userSpaceOnUse"
             initial={{
               x1: "0%",
@@ -64,7 +66,7 @@ const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
         </defs>
         <motion.path
           d={PATH}
-          stroke="url(#linear_gradient_meteor)" // Reference the gradient
+          stroke={`url(#${gradientId})`}
           strokeOpacity="1"
           strokeLinecap="round"
           strokeWidth="3"
