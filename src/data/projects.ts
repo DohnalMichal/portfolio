@@ -1,14 +1,24 @@
 import {
-  siReact,
+  siJavascript,
   siNextdotjs,
-  siTailwindcss,
-  siTypescript,
-  siCss3,
   siOpenai,
   siPrisma,
+  siReact,
+  siTailwindcss,
+  siThreedotjs,
+  siTypescript,
+  siVite,
 } from "simple-icons/icons";
 
 export const PROJECTS = [
+  {
+    title: "Klipsch RP-5000F II Ebony",
+    description:
+      "A Three.js visualization of the Klipsch RP-5000F II Ebony floor-standing speaker I have at home. Features a speaker cabinet with ebony wood texture, beveled rubber grille, dual woofers with brushed copper cones, orbit controls for 3D exploration, and a debug GUI for tweaking lights, materials and geometry.",
+    link: "https://klipsch-speaker.vercel.app/",
+    github: "https://github.com/DohnalMichal/klipsch-speaker",
+    icons: [siThreedotjs, siVite, siJavascript],
+  },
   {
     title: "AI Mood Journal",
     description:
@@ -30,13 +40,5 @@ export const PROJECTS = [
       "My personal portfolio website, built with Next.js and Tailwind CSS.",
     github: "https://github.com/DohnalMichal/portfolio",
     icons: [siNextdotjs, siReact, siTailwindcss, siTypescript],
-  },
-  {
-    title: "CSS Tricks Cards",
-    description:
-      "One of my very first project, a collection of cards, copying style of cards on css-tricks.com",
-    link: "https://dohnalmichal.github.io/CSS-Tricks-cards/",
-    github: "https://github.com/DohnalMichal/CSS-Tricks-cards",
-    icons: [siCss3],
-  },
+  }
 ];
