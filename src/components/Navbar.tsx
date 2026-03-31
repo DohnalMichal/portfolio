@@ -101,8 +101,8 @@ export const Navbar = () => {
 
       <ActionButton
         className="hidden h-[54px] md:flex"
-        href="/Michal_Dohnal_CV.pdf"
-        download="Michal_Dohnal_CV.pdf"
+        href="/Michal-Dohnal-CV.pdf"
+        download="Michal-Dohnal-CV.pdf"
       >
         Download CV
       </ActionButton>
@@ -188,8 +188,8 @@ export const Navbar = () => {
               >
                 <ActionButton
                   className="mt-10 h-[54px] md:hidden"
-                  href="/Michal_Dohnal_CV.pdf"
-                  download="Michal_Dohnal_CV.pdf"
+                  href="/Michal-Dohnal-CV.pdf"
+                  download="Michal-Dohnal-CV.pdf"
                 >
                   Download CV
                 </ActionButton>
