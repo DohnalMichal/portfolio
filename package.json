@@ -8,8 +8,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:prettier": "prettier . --write '**/*.{js,ts,tsx,json}' --ignore-unknown"
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint --write ./src",
+    "format": "prettier . --write '**/*.{js,ts,tsx,json,css}' --ignore-unknown"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.40.0",
@@ -29,14 +30,11 @@
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.16.0",
+    "@biomejs/biome": "2.1.2",
     "@types/node": "^20",
     "@types/react": "^19.2.4",
     "@types/react-dom": "^19.2.4",
     "babel-plugin-react-compiler": "^1.0.0",
-    "eslint": "^9.16.0",
-    "eslint-config-next": "^16.2.1",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",

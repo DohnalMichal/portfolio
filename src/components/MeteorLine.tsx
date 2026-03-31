@@ -1,5 +1,5 @@
+import { motion, useReducedMotion } from "framer-motion";
 import { useId } from "react";
-import { motion } from "framer-motion";
 
 type MeteorProps = {
   /**
@@ -20,7 +20,18 @@ type MeteorProps = {
 
 const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
   const gradientId = useId();
+  const prefersReducedMotion = useReducedMotion();
   const PATH = `M0.5 0 L0.5 ${height}`;
+
+  if (prefersReducedMotion) {
+    return (
+      <div
+        aria-hidden="true"
+        className="absolute -left-6 w-px bg-zinc-800"
+        style={{ height }}
+      />
+    );
+  }
 
   return (
     <div
@@ -28,6 +39,7 @@ const MeteorLine = ({ delay = 5, duration = 3, height = 220 }: MeteorProps) => {
       style={{ height }}
     >
       <svg
+        aria-hidden="true"
         width="1"
         height={height}
         viewBox={`0 0 1 ${height}`}

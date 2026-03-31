@@ -1,32 +1,73 @@
 "use client";
 
-import { LINKS } from "@/data/links";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import { useState } from "react";
-import { HomeLink } from "./HomeLink";
 import { CircleX, Menu } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { LINKS } from "@/data/links";
 import { ActionButton } from "./ActionButton";
+import { HomeLink } from "./HomeLink";
+
+const MOBILE_MENU_ID = "mobile-nav-menu";
 
 export const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const downloadCV = () => {
-    const link = document.createElement("a");
-    link.href = "/Michal_Dohnal_CV.pdf";
-    link.download = "Michal_Dohnal_CV.pdf";
-    link.click();
-  };
+  // Focus management: move focus into menu on open, return it on close.
+  // Also handles Escape key and focus trap while the menu is open.
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMenuOpen(false);
+        return;
+      }
+
+      if (e.key === "Tab" && menuPanelRef.current) {
+        const focusable = menuPanelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      menuButtonRef.current?.focus();
+    };
+  }, [isMenuOpen]);
 
   return (
     <div className="relative z-[100] mx-auto flex max-w-5xl flex-row items-center justify-between px-8 py-8 sm:justify-between">
-      {/* Desktop */}
-      <nav className="hidden flex-row items-center space-x-8 rounded-2xl border border-gray-700/60 bg-gray-800 px-4 py-2 md:flex">
+      {/* Desktop nav */}
+      <nav
+        aria-label="Main navigation"
+        className="hidden flex-row items-center space-x-8 rounded-2xl border border-gray-700/60 bg-gray-800 px-4 py-2 md:flex"
+      >
         <HomeLink />
         {LINKS.map((link, index) => (
           <Link
@@ -57,38 +98,57 @@ export const Navbar = () => {
           </Link>
         ))}
       </nav>
-      <ActionButton className="hidden h-[54px] md:flex" onClick={downloadCV}>
+
+      <ActionButton
+        className="hidden h-[54px] md:flex"
+        href="/Michal_Dohnal_CV.pdf"
+        download="Michal_Dohnal_CV.pdf"
+      >
         Download CV
       </ActionButton>
-      {/* Mobile */}
+
+      {/* Mobile header row */}
       <div className="flex w-full justify-between md:hidden">
         <HomeLink />
         <button
-          aria-label="menu"
+          ref={menuButtonRef}
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded={isMenuOpen}
+          aria-controls={MOBILE_MENU_ID}
           className="h-6 w-6 cursor-pointer text-gray-100 transition-all duration-100 hover:text-gray-400"
           onClick={toggleMenu}
         >
-          <Menu />
+          <Menu aria-hidden="true" />
         </button>
       </div>
 
-      {/* Mobile fullscreen Menu */}
+      {/* Mobile fullscreen menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
+            ref={menuPanelRef}
+            id={MOBILE_MENU_ID}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
             className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gray-900"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <button
+              ref={closeButtonRef}
+              type="button"
+              aria-label="Close navigation menu"
               className="absolute right-8 top-8 h-6 w-6 text-gray-100 transition-all duration-100 hover:text-gray-400"
               onClick={toggleMenu}
             >
-              <CircleX />
+              <CircleX aria-hidden="true" />
             </button>
 
             <motion.nav
+              aria-label="Mobile navigation"
               className="flex flex-col items-center space-y-6"
               initial="hidden"
               animate="show"
@@ -128,7 +188,8 @@ export const Navbar = () => {
               >
                 <ActionButton
                   className="mt-10 h-[54px] md:hidden"
-                  onClick={downloadCV}
+                  href="/Michal_Dohnal_CV.pdf"
+                  download="Michal_Dohnal_CV.pdf"
                 >
                   Download CV
                 </ActionButton>

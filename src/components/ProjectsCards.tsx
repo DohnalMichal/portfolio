@@ -3,8 +3,8 @@
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
-import { SimpleIcon, siGithub } from "simple-icons/icons";
+import { type ReactNode, useState } from "react";
+import { type SimpleIcon, siGithub } from "simple-icons/icons";
 import { Icon } from "./Icon";
 import { Link as LinkIcon } from "lucide-react";
 
@@ -34,6 +34,7 @@ export const ProjectsCards = ({ items, className }: Props) => {
       {items.map((item, idx) => (
         <div
           key={item.title}
+          role="none"
           className="group relative block h-full w-full p-2"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -80,22 +81,24 @@ export const ProjectsCards = ({ items, className }: Props) => {
                 {item.link && (
                   <Link
                     href={item.link}
+                    aria-label={`${item.title} — view live (opens in new tab)`}
                     className="group flex max-w-fit flex-row items-center gap-2 pt-8 text-sm text-gray-400 hover:text-gray-500"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <LinkIcon size={16} />
-                    View live
+                    <LinkIcon size={16} aria-hidden="true" />
+                    <span aria-hidden="true">View live</span>
                   </Link>
                 )}
                 <Link
                   href={item.github}
+                  aria-label={`${item.title} — view source on GitHub (opens in new tab)`}
                   className="group flex max-w-fit flex-row items-center gap-2 pt-2 text-sm text-gray-400 hover:text-gray-500"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon icon={siGithub} size={16} />
-                  View source
+                  <Icon icon={siGithub} size={16} decorative />
+                  <span aria-hidden="true">View source</span>
                 </Link>
               </div>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { memo } from "react";
 
@@ -64,6 +64,10 @@ const BEAM_ANIMATIONS = PATHS.map(() => ({
 }));
 
 export const BackgroundBeams = memo(({ className }: { className?: string }) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) return null;
+
   return (
     <div
       className={cn(
@@ -72,6 +76,7 @@ export const BackgroundBeams = memo(({ className }: { className?: string }) => {
       )}
     >
       <svg
+        aria-hidden="true"
         className="pointer-events-none absolute z-0 h-full w-full"
         width="100%"
         height="100%"
@@ -88,7 +93,7 @@ export const BackgroundBeams = memo(({ className }: { className?: string }) => {
 
         {PATHS.map((path, index) => (
           <motion.path
-            key={`path-` + index}
+            key={path}
             d={path}
             stroke={`url(#linearGradient-${index})`}
             strokeOpacity="0.4"
@@ -96,10 +101,10 @@ export const BackgroundBeams = memo(({ className }: { className?: string }) => {
           />
         ))}
         <defs>
-          {PATHS.map((_, index) => (
+          {PATHS.map((path, index) => (
             <motion.linearGradient
               id={`linearGradient-${index}`}
-              key={`gradient-${index}`}
+              key={path}
               initial={{
                 x1: "0%",
                 x2: "0%",

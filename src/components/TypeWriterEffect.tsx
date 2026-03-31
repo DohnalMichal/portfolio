@@ -1,8 +1,8 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
+import { type JSX, useEffect, useState } from "react";
 import { cn } from "@/utils/cn";
-import { motion } from "framer-motion";
-import { JSX, useEffect, useState } from "react";
 
 interface WordConfig {
   text: string;
@@ -49,13 +49,15 @@ export const TypewriterRotating = ({
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentRotatingIndex, setCurrentRotatingIndex] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
 
-  const stableSentence = stableWords.map((word) => word.text).join(" ") + " ";
-  const currentRotatingWord =
-    rotatingWords && rotatingWords[currentRotatingIndex].text;
+  const stableSentence = `${stableWords.map((word) => word.text).join(" ")} `;
+  const currentRotatingWord = rotatingWords?.[currentRotatingIndex].text;
   const fullText = stableSentence + currentRotatingWord;
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     let timer: NodeJS.Timeout;
 
     if (!isDeleting) {
@@ -89,6 +91,7 @@ export const TypewriterRotating = ({
 
     return () => clearTimeout(timer);
   }, [
+    prefersReducedMotion,
     displayedText,
     isDeleting,
     fullText,
@@ -99,6 +102,17 @@ export const TypewriterRotating = ({
     rotatingWords?.length,
   ]);
 
+  const elementClass = cn(
+    "text-left text-base font-bold sm:text-xl md:text-4xl lg:text-5xl",
+    className,
+  );
+
+  // Show static text for users who prefer reduced motion
+  if (prefersReducedMotion) {
+    const staticText = `${stableSentence}${rotatingWords?.[0]?.text ?? ""}`.trim();
+    return <Element className={elementClass}>{staticText}</Element>;
+  }
+
   // Separate the displayed text into stable and rotating segments
   const stableLength = stableSentence.length;
   const stableSegment = displayedText.slice(0, stableLength);
@@ -107,14 +121,14 @@ export const TypewriterRotating = ({
   const stableOutput = (() => {
     let offset = 0;
 
-    return stableWords.map((sw, index) => {
-      const wordWithSpace = sw.text + " ";
+    return stableWords.map((sw) => {
+      const wordWithSpace = `${sw.text} `;
       const endOffset = offset + wordWithSpace.length;
       const typedPart = stableSegment.slice(offset, endOffset);
       offset = endOffset;
 
       return (
-        <span key={`stable-word-${index}`} className={cn(sw.className)}>
+        <span key={sw.text} className={cn(sw.className)}>
           {typedPart}
         </span>
       );
@@ -122,24 +136,16 @@ export const TypewriterRotating = ({
   })();
 
   return (
-    <Element
-      className={cn(
-        "text-left text-base font-bold sm:text-xl md:text-4xl lg:text-5xl",
-        className,
-      )}
-    >
+    <Element className={elementClass}>
       {stableOutput}
 
       {rotatingSegment && rotatingWords && (
-        <span
-          className={cn(
-            rotatingWords && rotatingWords[currentRotatingIndex].className,
-          )}
-        >
+        <span className={cn(rotatingWords?.[currentRotatingIndex].className)}>
           {rotatingSegment}
         </span>
       )}
       <motion.span
+        aria-hidden="true"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{

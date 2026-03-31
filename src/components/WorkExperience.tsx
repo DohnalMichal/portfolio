@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useId, useRef, useState } from "react";
 import { cn } from "@/utils/cn";
 import { MeteorLine } from "./MeteorLine";
 
@@ -17,17 +17,54 @@ type Item = {
 };
 
 const WorkExperience = ({ items }: { items: Item[] }) => {
-  const [selectedCompany, setSelectedCompany] = useState(items[0]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedCompany = items[selectedIndex];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const id = useId();
+  const tabPanelId = `${id}-panel`;
+  const tabId = (company: string) => `${id}-tab-${company}`;
+
+  const handleTabKeyDown = (
+    e: React.KeyboardEvent,
+    index: number,
+  ) => {
+    let newIndex: number | null = null;
+
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault();
+      newIndex = (index + 1) % items.length;
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      newIndex = (index - 1 + items.length) % items.length;
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      newIndex = 0;
+    } else if (e.key === "End") {
+      e.preventDefault();
+      newIndex = items.length - 1;
+    }
+
+    if (newIndex !== null) {
+      setSelectedIndex(newIndex);
+      tabRefs.current[newIndex]?.focus();
+    }
+  };
 
   return (
     <div className="mx-auto mt-12 flex max-w-2xl flex-col space-y-4 md:flex-row md:space-x-2 md:space-y-0">
-      <div className="relative flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-x-visible">
+      <div
+        role="tablist"
+        aria-label="Work experience"
+        aria-orientation="vertical"
+        className="relative flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-x-visible"
+      >
         <MeteorLine height={220} />
 
         {items.map((item, index) => (
           <div
             key={item.company}
+            role="none"
             className="group relative block"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -51,11 +88,21 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
             </AnimatePresence>
             <div className="relative">
               <button
+                ref={(el) => {
+                  tabRefs.current[index] = el;
+                }}
+                type="button"
+                role="tab"
+                id={tabId(item.company)}
+                aria-selected={selectedIndex === index}
+                aria-controls={tabPanelId}
+                tabIndex={selectedIndex === index ? 0 : -1}
                 className={cn(
                   "group relative z-20 flex w-full min-w-28 cursor-pointer flex-row items-center gap-3 space-x-2 rounded-md px-4 py-2 text-left text-gray-300",
-                  selectedCompany.company === item.company && "bg-gray-800",
+                  selectedIndex === index && "bg-gray-800",
                 )}
-                onClick={() => setSelectedCompany(item)}
+                onClick={() => setSelectedIndex(index)}
+                onKeyDown={(e) => handleTabKeyDown(e, index)}
               >
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-gray-700 to-gray-800">
                   <Image
@@ -73,7 +120,15 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
           </div>
         ))}
       </div>
-      <div className="flex-1 md:pl-10">
+
+      <div
+        id={tabPanelId}
+        role="tabpanel"
+        aria-labelledby={tabId(selectedCompany.company)}
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: tabpanel with only static content should be focusable per ARIA APG tabs pattern
+        tabIndex={0}
+        className="flex-1 md:pl-10"
+      >
         <div className="flex flex-col space-y-4">
           <h3 className="text-2xl font-bold text-gray-100 sm:text-lg md:text-xl">
             {selectedCompany.role}{" "}
@@ -87,17 +142,20 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
             {selectedCompany.place}
           </p>
         </div>
-        <div className="mt-4 min-h-36 md:min-h-48">
+        <ul className="mt-4 min-h-36 list-none md:min-h-48">
           {selectedCompany.bullets.map((bullet) => (
-            <div
+            <li
               key={bullet}
               className="flex flex-row items-start space-x-2 text-sm"
             >
-              <div className="mt-4 min-h-2 min-w-2 rounded-full bg-blue-500" />
+              <div
+                aria-hidden="true"
+                className="mt-4 min-h-2 min-w-2 rounded-full bg-blue-500"
+              />
               <p className="mt-2 text-gray-300">{bullet}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );
