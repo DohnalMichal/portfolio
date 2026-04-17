@@ -8,9 +8,21 @@ export const WORK_EXPERIENCE_ITEMS = [
     place: "Brno, Czech Republic",
     bullets: [
       "Developing and optimizing interactive web forms for insurance applications using modern frontend technologies such as React, Next.js, and Tailwind CSS.",
-      "Introducing coding standards and best practices to the team, significantly improving code quality and maintainability.",
+      "Improved frontend performance: -76% image payload, -55% LCP, -48% TBT, +15 Lighthouse points.",
       "Contributed to a large-scale company rebranding, maintaining and integrating two parallel design systems — legacy and rebranded — across multiple applications.",
+      "Introducing coding standards and best practices to the team, significantly improving code quality and maintainability.",
       "Worked with Strapi CMS — maintaining existing features and a few internal plugins used for managing content.",
+    ],
+  },
+  {
+    logo: "/companies/coderslab.svg",
+    company: "Coders Lab",
+    role: "Lecturer & Mentor",
+    date: "Mar 2025 - Sep 2025",
+    place: "Remote",
+    bullets: [
+      "Delivered lectures and workshops on HTML, CSS, JavaScript (ES6+), and React.",
+      "Mentored students through code reviews, helping them understand best practices, architecture decisions, and modern frontend patterns.",
     ],
   },
   {

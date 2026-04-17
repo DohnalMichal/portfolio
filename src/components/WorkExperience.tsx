@@ -129,33 +129,40 @@ const WorkExperience = ({ items }: { items: Item[] }) => {
         tabIndex={0}
         className="flex-1 md:pl-10"
       >
-        <div className="flex flex-col space-y-4">
-          <h3 className="text-2xl font-bold text-gray-100 sm:text-lg md:text-xl">
-            {selectedCompany.role}{" "}
-            <span className="text-blue-500">
-              @ {selectedCompany.companyFull ?? selectedCompany.company}
-            </span>
-          </h3>
-          <p className="text-sm tracking-widest text-gray-300">
-            {selectedCompany.date}
-            <br />
-            {selectedCompany.place}
-          </p>
-        </div>
-        <ul className="mt-4 min-h-36 list-none md:min-h-48">
-          {selectedCompany.bullets.map((bullet) => (
-            <li
-              key={bullet}
-              className="flex flex-row items-start space-x-2 text-sm"
-            >
-              <div
-                aria-hidden="true"
-                className="mt-4 min-h-2 min-w-2 rounded-full bg-blue-500"
-              />
-              <p className="mt-2 text-gray-300">{bullet}</p>
-            </li>
-          ))}
-        </ul>
+        <motion.div
+          key={selectedCompany.company}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="flex flex-col space-y-4">
+            <h3 className="text-2xl font-bold text-gray-100 sm:text-lg md:text-xl">
+              {selectedCompany.role}{" "}
+              <span className="text-blue-500">
+                @ {selectedCompany.companyFull ?? selectedCompany.company}
+              </span>
+            </h3>
+            <p className="text-sm tracking-widest text-gray-300">
+              {selectedCompany.date}
+              <br />
+              {selectedCompany.place}
+            </p>
+          </div>
+          <ul className="mt-4 list-none">
+            {selectedCompany.bullets.map((bullet) => (
+              <li
+                key={bullet}
+                className="flex flex-row items-start space-x-2 text-sm"
+              >
+                <div
+                  aria-hidden="true"
+                  className="mt-4 min-h-2 min-w-2 rounded-full bg-blue-500"
+                />
+                <p className="mt-2 text-gray-300">{bullet}</p>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </div>
   );

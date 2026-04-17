@@ -9,8 +9,8 @@ export const TIMELINE_DATA = [
           JavaScript & React Lecturer at Coders&nbsp;Lab
         </h3>
         <p className="text-sm tracking-widest text-gray-400">
-          Delivering interactive lectures and workshops on frontend development,
-          including HTML, CSS, JavaScript (ES6+), and React. Providing
+          Delivered interactive lectures and workshops on frontend development,
+          including HTML, CSS, JavaScript (ES6+), and React. Provided
           personalized feedback and code reviews to help students develop good
           habits, efficient coding techniques, and a solid grasp of
           industry-standard practices.

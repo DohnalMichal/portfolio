@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  type MotionValue,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   type ReactNode,
   type RefObject,
@@ -13,6 +19,41 @@ interface TimelineEntry {
   title: string;
   content: ReactNode;
 }
+
+const TimelineDot = ({
+  containerRef,
+  heightTransform,
+}: {
+  containerRef: RefObject<HTMLDivElement | null>;
+  heightTransform: MotionValue<number>;
+}) => {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useState(false);
+
+  useMotionValueEvent(heightTransform, "change", (lineHeight) => {
+    if (!dotRef.current || !containerRef.current) return;
+    const dotTop =
+      dotRef.current.getBoundingClientRect().top -
+      containerRef.current.getBoundingClientRect().top;
+    setIsActive(lineHeight > dotTop);
+  });
+
+  return (
+    <div
+      ref={dotRef}
+      aria-hidden="true"
+      className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-950 md:left-3"
+    >
+      <div
+        className={`h-4 w-4 rounded-full border p-2 transition-colors duration-300 ${
+          isActive
+            ? "border-blue-500 bg-blue-500"
+            : "border-gray-700 bg-gray-600"
+        }`}
+      />
+    </div>
+  );
+};
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,9 +95,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             className="flex justify-start pt-10 first:pt-8 md:gap-10 md:pt-40 first:md:pt-20"
           >
             <div className="top-40 z-40 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
-              <div aria-hidden="true" className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-950 md:left-3">
-                <div className="h-4 w-4 rounded-full border border-gray-700 bg-gray-600 p-2" />
-              </div>
+              <TimelineDot
+                containerRef={ref}
+                heightTransform={heightTransform}
+              />
               <h3 className="hidden text-nowrap text-xl font-bold text-gray-100 md:block md:pl-20 md:text-4xl">
                 {item.title}
               </h3>
